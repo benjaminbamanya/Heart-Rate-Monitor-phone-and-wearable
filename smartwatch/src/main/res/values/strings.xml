@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">SmartWatch</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+
+
+    <string name="hello_round">00</string>
+    <string name="hello_square">Hello Square World!</string>
+    <string name="itulogo">itulogo</string>
+    <string name="send_alarm">Send alarm</string>
+    <string name="itu_ehb_408e_course_project">mHealth</string>
+    <string name="course_project">BWM</string>
+</resources>
