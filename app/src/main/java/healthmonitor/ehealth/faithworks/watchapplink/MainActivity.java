@@ -15,9 +15,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.telephony.SmsManager;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +24,8 @@ import com.google.firebase.appindexing.FirebaseAppIndex;
 import com.google.firebase.appindexing.FirebaseUserActions;
 import com.google.firebase.appindexing.Indexable;
 import com.google.firebase.appindexing.builders.Actions;
+
+import java.util.Random;
 
 //import android.support.v7.app.ActionBarActivity;
 //import com.google.android.gms.appindexing.Action;
@@ -42,31 +41,68 @@ public class MainActivity extends Activity {
     boolean sendFlag;
     private TextView textView;
     private FirebaseAppIndex firebaseAppIndex;
+    final Handler mhandler = new Handler();
+    Runnable runnable = new Runnable() {
+
+        @Override
+        public void run() {
+            try {
+                //do your code here
+                //Toast.makeText(HomeActivity.this, "Regular Click", Toast.LENGTH_SHORT).show();
+
+
+                int bpm = BPMValue();
+
+
+                textView.setText("   " + bpm);
+            } catch (Exception e) {
+                // TODO: handle exception
+            } finally {
+                //also call the same runnable to call it at regular interval
+                mhandler.postDelayed(this, 5000);
+            }
+        }
+    };
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if (textView != null) {
-                textView.setText(Integer.toString(msg.what));
-                if ((msg.what > 80 || msg.what < 78) && !flag) {
-                    flag = true;
-                    SmsManager smsManager = SmsManager.getDefault();
 
-                    if (Build.VERSION.SDK_INT >= 23) {
-                        if (checkPermission()) {
-                            Log.e("permission", "Permission already granted.");
-                            smsManager.sendTextMessage(number, null, "Alert! The owner of the watch might be having a heart attack! The heart beat rate is " + Integer.toString(msg.what), null, null);
+            if (msg.what == 0) {
+                mhandler.post(runnable);
+            } else {
+
+                if (textView != null) {
+                    textView.setText(Integer.toString(msg.what));
+                    if ((msg.what > 80 || msg.what < 78) && !flag) {
+                        flag = true;
+                        SmsManager smsManager = SmsManager.getDefault();
+
+                        if (Build.VERSION.SDK_INT >= 23) {
+                            if (checkPermission()) {
+                                Log.e("permission", "Permission already granted.");
+                                smsManager.sendTextMessage(number, null, "Alert! The owner of the watch might be having a heart attack! The heart beat rate is " + Integer.toString(msg.what), null, null);
 
 
-                        } else {
-                            requestPermission();
+                            } else {
+                                requestPermission();
+                            }
                         }
+                        //smsManager.sendTextMessage(number, null, "Alert! The owner of the watch might be having a heart attack! The heart beat rate is "+Integer.toString(msg.what), null, null);
                     }
-                    //smsManager.sendTextMessage(number, null, "Alert! The owner of the watch might be having a heart attack! The heart beat rate is "+Integer.toString(msg.what), null, null);
                 }
             }
 
+
         }
     };
+
+    public int BPMValue() {
+        Random r = new Random();
+        int low = 10;
+        int high = 120;
+        int result = r.nextInt(high - low) + low;
+        return result;
+    }
 
     //deprecated //private GoogleApiClient client;
     @Override
@@ -74,16 +110,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
 
-
-        firebaseAppIndex = FirebaseAppIndex.getInstance();
         setContentView(R.layout.activity_main);
         textView = (TextView) findViewById(R.id.heartbeat);
-        Button dugme = (Button) findViewById(R.id.send_sms);
-        Button dugme2 = (Button) findViewById(R.id.save);
-        Button dugme3 = (Button) findViewById(R.id.change);
-        Button dugme4 = (Button) findViewById(R.id.button4);
-        final EditText girdi = (EditText) findViewById(R.id.editText);
-
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkPermission()) {
                 Log.e("permission", "Permission already granted.");
@@ -106,34 +134,6 @@ public class MainActivity extends Activity {
         }
 
 
-        dugme.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(number, null, "Alert! The owner of the watch might need help!", null, null);
-
-
-            }
-        });
-        dugme2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                number = girdi.getText().toString();
-                girdi.setEnabled(false);
-            }
-        });
-        dugme3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                girdi.setEnabled(true);
-            }
-        });
-        dugme4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                flag = false;
-            }
-        });
         //Deprecated //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 

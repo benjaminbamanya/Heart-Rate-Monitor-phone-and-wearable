@@ -18,16 +18,33 @@ public class DataLayerListenerService extends WearableListenerService {
     private static Handler handler;
     private static int currentValue = 0;
 
+
     public static Handler getHandler() {
         return handler;
     }
 
     public static void setHandler(Handler handler) {
         DataLayerListenerService.handler = handler;
+
+
         // send current value as initial value.
-        if (handler != null)
+        if (handler != null) {
+
+
+
             handler.sendEmptyMessage(currentValue);
+        } else {
+            Log.d(LOG_TAG, "Nothing yet");
+
+
+        }
+
+
     }
+
+
+
+
 
     @Override
     public void onPeerConnected(Node peer) {
@@ -48,6 +65,11 @@ public class DataLayerListenerService extends WearableListenerService {
         if (handler != null) {
             // if a handler is registered, send the value as new message
             handler.sendEmptyMessage(currentValue);
+        } else {
+
+            Log.d(LOG_TAG, "Nothing received");
+
+
         }
     }
 
