@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "585050548785",
+    "firebase_url": "https://watchapplink.firebaseio.com",
+    "project_id": "watchapplink",
+    "storage_bucket": "watchapplink.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:585050548785:android:c1136101192dbdfa",
+        "android_client_info": {
+          "package_name": "healthmonitor.ehealth.faithworks.watchapplink"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "585050548785-vpoftvapnvaprrl15fm5rhbsocihqp7t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "healthmonitor.ehealth.faithworks.watchapplink",
+            "certificate_hash": "a135f0d96e5add24b64752940306a786dd6d51e5"
+          }
+        },
+        {
+          "client_id": "585050548785-bmvljdfujjk3othsocnvnmgoucsha90t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl3N-2gksWhL4_Fl-olNz4QhpaMczCB4o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "585050548785-bmvljdfujjk3othsocnvnmgoucsha90t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

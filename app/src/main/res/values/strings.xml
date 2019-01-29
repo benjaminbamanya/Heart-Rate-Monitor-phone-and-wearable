@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">WatchAppLink</string>
+
+    <string name="send_sms">Send SMS</string>
+    <string name="write_down_the_phone_number_here">Write down the phone number here.</string>
+    <string name="heart_beat_rate">HEART BEAT RATE</string>
+    <string name="bpm">bpm</string>
+    <string name="itu_ehb_408e_course_project">ITU EHB 408E Course Project</string>
+    <string name="save">Save</string>
+    <string name="change">CHANGE</string>
+    <string name="refresh">Refresh</string>
+    <string name="_88">88</string>
+</resources>
