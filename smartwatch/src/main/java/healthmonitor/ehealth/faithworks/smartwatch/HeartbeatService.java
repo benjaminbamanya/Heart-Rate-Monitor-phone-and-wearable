@@ -86,7 +86,6 @@ public class HeartbeatService extends Service implements SensorEventListener {
 
         }
 
-
         mGoogleApiClient = new GoogleApiClient.Builder(this).addApi(Wearable.API).build();
         mGoogleApiClient.connect();
     }
